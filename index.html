@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指甲套装订购指南</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(232, 67, 147, 0.15);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2.8rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        .gif-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .gif-box {
+            background: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+        
+        .gif-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(232, 67, 147, 0.2);
+            border-color: #ffb8c6;
+        }
+        
+        .gif-header {
+            background: linear-gradient(135deg, #e84393 0%, #fd79a8 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .gif-header i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .gif-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .gif-image {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 3px solid white;
+            transition: all 0.3s ease;
+        }
+        
+        .gif-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .gif-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .gif-description {
+            padding: 15px;
+            text-align: center;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .instructions {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .step {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border-left: 4px solid #e84393;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgba(232, 67, 147, 0.05) 100%);
+            z-index: 1;
+        }
+        
+        .step-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-title {
+            color: #e84393;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-title i {
+            margin-right: 10px;
+            background: #ffe0e6;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step-text {
+            color: #555;
+            line-height: 1.7;
+            padding-left: 45px;
+        }
+        
+        .highlight {
+            background: #ffeaa7;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #d35400;
+        }
+        
+        .note {
+            background: #f0f9ff;
+            border-left: 4px solid #4dabf7;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #e84393 0%, #ff6b6b 100%);
+            color: white;
+            text-align: center;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(232, 67, 147, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.4);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #777;
+            font-size: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .step-dot.active {
+            background: #e84393;
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .gif-container {
+                flex-direction: column;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .gif-box {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .gif-box:nth-child(1) { animation-delay: 0.1s; }
+        .gif-box:nth-child(2) { animation-delay: 0.3s; }
+        .gif-box:nth-child(3) { animation-delay: 0.5s; }
+        
+        .step {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .step:nth-child(1) { animation-delay: 0.2s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.6s; }
+        .step:nth-child(4) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-fingerprint"></i> 指甲套装订购指南</h1>
+            <p>简单四步，定制您的专属美甲套装</p>
+        </div>
+        
+        <div class="content">
+            <div class="gif-container">
+                <!-- 步骤1 -->
+                <div class="gif-box">
+                    <div class="gif-header">
+                        <i class="fas fa-shopping-cart"></i> 步骤1：加入购物车
+                    </div>
+                    <div class="gif-content">
+                        <div class="gif-image">
+                            <img src="//pampernailgallery.com/cdn/shop/files/how_to_step_1.gif?v=1655709858" alt="加入购物车步骤">
+                        </div>
+                        <div class="gif-description">
+                            选择您喜欢的指甲套装，点击<span class="highlight">"ADD TO CART"</span>按钮
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤2 -->
+                <div class="gif-box">
+                    <div class="gif-header">
+                        <i class="fas fa-toolbox"></i> 步骤2：接收测量工具
+                    </div>
+                    <div class="gif-content">
+                        <div class="gif-image">
+                            <img src="//pampernailgallery.com/cdn/shop/files/how_to_step_2.gif?v=1655709946" alt="接收测量工具">
+                        </div>
+                        <div class="gif-description">
+                            我们将免费寄送专业指甲尺寸测量工具给您
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤3 -->
+                <div class="gif-box">
+                    <div class="gif-header">
+                        <i class="fas fa-ruler-combined"></i> 步骤3：测量并回复
+                    </div>
+                    <div class="gif-content">
+                        <div class="gif-image">
+                            <img src="//pampernailgallery.com/cdn/shop/files/how_to_step_3.gif?v=1655709960" alt="测量并回复">
+                        </div>
+                        <div class="gif-description">
+                            按照说明测量指甲尺寸，并通过短信回复确认
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-title">
+                            <i class="fas fa-1"></i> 加入购物车
+                        </div>
+                        <div class="step-text">
+                            浏览我们的指甲套装系列，选择您喜欢的款式并加入购物车。请注意，此时<span class="highlight">不会立即发货</span>，我们会先寄送测量工具。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-title">
+                            <i class="fas fa-2"></i> 接收测量工具
+                        </div>
+                        <div class="step-text">
+                            下单后2-3个工作日内，您将收到我们寄出的专业指甲尺寸测量工具包。内含详细的使用说明和测量卡。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-title">
+                            <i class="fas fa-3"></i> 自助测量
+                        </div>
+                        <div class="step-text">
+                            按照说明轻松测量您的指甲尺寸。我们的测量工具设计简单易用，只需5分钟即可完成精准测量。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-title">
+                            <i class="fas fa-4"></i> 短信确认
+                        </div>
+                        <div class="step-text">
+                            将测量结果通过短信回复给我们。收到确认后，我们将立即开始为您<span class="highlight">定制专属指甲套装</span>。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <strong><i class="fas fa-info-circle"></i> 重要提示：</strong> 
+                    定制过程需要5-7个工作日。收到您的尺寸确认后，我们将开始制作，并通过短信发送制作进度更新。
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#" class="cta-button">
+                        <i class="fas fa-shopping-bag"></i> 立即选购指甲套装
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 美甲精品店 | 定制您的专属美丽 | 客服热线: 400-123-4567</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                注意：动图仅用于展示订购流程，实际产品以实物为准
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 添加简单的动图交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const gifBoxes = document.querySelectorAll('.gif-box');
+            
+            gifBoxes.forEach(box => {
+                box.addEventListener('click', function() {
+                    // 移除所有激活状态
+                    gifBoxes.forEach(b => b.classList.remove('active'));
+                    
+                    // 添加激活状态到当前点击的box
+                    this.classList.add('active');
+                    
+                    // 添加视觉反馈
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // 添加按钮悬停效果
+            const ctaButton = document.querySelector('.cta-button');
+            if(ctaButton) {
+                ctaButton.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 10px 30px rgba(232, 67, 147, 0.5)';
+                });
+                
+                ctaButton.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '0 5px 20px rgba(232, 67, 147, 0.3)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
